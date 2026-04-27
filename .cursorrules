@@ -1,0 +1,27 @@
+# AI Context & Project Rules: SkillMatch
+
+You are an AI assistant working on the "SkillMatch" frontend prototype. Read these instructions carefully before making any code modifications.
+
+## 1. Tech Stack & Versioning (CRITICAL)
+- **React**: v18 (Do NOT upgrade to React 19).
+- **Chakra UI**: v2.8.2. 
+  - **WARNING**: Do NOT use Chakra UI v3 syntax. We rely heavily on `extendTheme` (in `src/theme/theme.js`) and v2-specific style props and components. If you try to use `createSystem` or Panda CSS concepts from v3, the app will break.
+- **Framer Motion**: v10/v11.
+- **Vite**: Used for tooling and build.
+
+## 2. Project Architecture (No Database)
+- **Data Layer**: There is NO backend. All data is mock data located in `src/data/mockData.js`.
+- **State Management**: We use `src/context/AppContext.jsx` to manage the global state and logic. It syncs the React state with `localStorage` (keys: `sm_alunos`, `sm_empresas`, `sm_projetos`, `sm_usuario`) to persist data during the prototype demonstration.
+- If you need to add new entities or modify existing data structures, you MUST do so in both `mockData.js` and update the respective handler functions inside `AppContext.jsx`.
+
+## 3. Core Business Rules
+- **One Project At A Time**: A student (`aluno`) can only be in ONE active project. If `aluno.em_projeto` is true, they cannot apply for other projects.
+- **Team Dynamics**: A project (`projeto`) has a `vagas` (slots) property. Students apply, and the company (`empresa`) accepts them. Once `projeto.time.length === projeto.vagas`, the project automatically becomes `em_andamento`.
+- **Completion**: When a company completes a project, all students inside `projeto.time` are released (`em_projeto: false`) and the project is pushed to their internal portfolio.
+
+## 4. UI/UX & Design Patterns
+- **Aesthetics**: The app uses a dark, premium theme featuring **Glassmorphism** (semi-transparent backgrounds with blur effects), bright cyan/blue gradients, and subtle hover animations using Framer Motion.
+- **Consistency**: Keep this visual identity. Do not introduce raw CSS or arbitrary inline styles if Chakra UI tokens or the existing `theme.js` configurations can do the job. 
+
+## 5. Do Not Break The Demo
+- This is an academic presentation prototype. Do not add complex Authentication setups (JWT, OAuth) or external databases unless explicitly asked by the user, as it exceeds the scope of the 10-minute presentation. Keep the fake login mechanism intact.
