@@ -50,7 +50,8 @@ export default function Chat() {
     if (conversaId) {
       marcarComoLida(conversaId);
     }
-  }, [conversaId, getMensagensConversa]);
+    // Removemos getMensagensConversa daqui
+  }, [conversaId]);
 
   // Scroll para o fim ao receber mensagem nova (só dentro do container de mensagens)
   const mensagensCount = conversaId ? getMensagensConversa(conversaId).length : 0;
@@ -58,7 +59,8 @@ export default function Chat() {
     if (messagesContainerRef.current) {
       messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
     }
-  }, [mensagensCount, conversaId]);
+    // Remova o conversaId daqui se o mensagensCount já for suficiente
+  }, [mensagensCount]);
 
   if (!usuario) return null;
 
