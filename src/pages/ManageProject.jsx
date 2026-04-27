@@ -12,7 +12,7 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { HiArrowLeft, HiCheck, HiX, HiUsers } from 'react-icons/hi';
+import { HiArrowLeft, HiCheck, HiX, HiUsers, HiChat } from 'react-icons/hi';
 import { useApp } from '../context/AppContext';
 import TeamBadge from '../components/TeamBadge';
 import { motion } from 'framer-motion';
@@ -171,7 +171,12 @@ export default function ManageProject() {
                           spacing={4}
                         >
                           <Text fontSize="2xl">{aluno?.avatar}</Text>
-                          <VStack align="start" spacing={0} flex={1}>
+                          <VStack align="start"
+                            spacing={0}
+                            flex={1}
+                            cursor="pointer"
+                            onClick={() => navigate(`/freelancer/${alunoId}`)} // Redireciona para o perfil
+                            _hover={{ opacity: 0.8 }}>
                             <Text fontWeight="600" fontSize="sm">{aluno?.nome}</Text>
                             <Text fontSize="xs" color="gray.500">{aluno?.nivel}</Text>
                           </VStack>
@@ -243,9 +248,13 @@ export default function ManageProject() {
                           borderRadius="xl"
                           p={5}
                         >
+
                           <VStack align="stretch" spacing={4}>
                             <Flex justify="space-between" align="start" flexWrap="wrap" gap={3}>
-                              <HStack spacing={3}>
+                              <HStack spacing={3}
+                                cursor="pointer"
+                                onClick={() => navigate(`/freelancer/${cand.aluno_id}`)}
+                                _hover={{ opacity: 0.8 }}>
                                 <Text fontSize="2xl">{aluno?.avatar}</Text>
                                 <VStack align="start" spacing={0}>
                                   <Text fontWeight="700" fontSize="sm">{aluno?.nome}</Text>
@@ -300,6 +309,21 @@ export default function ManageProject() {
                                 >
                                   Aceitar
                                 </Button>
+
+                                {/* BOTÃO DE CHAT ADICIONADO AQUI */}
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  leftIcon={<HiChat />}
+                                  color="cyan.300"
+                                  borderColor="rgba(0,198,255,0.3)"
+                                  _hover={{ bg: "rgba(0,198,255,0.1)" }}
+                                  onClick={() => navigate(`/chat/${cand.aluno_id}_emp1`)}
+                                  flex={1}
+                                >
+                                  Chat
+                                </Button>
+
                                 <Button
                                   variant="ghost"
                                   size="sm"
