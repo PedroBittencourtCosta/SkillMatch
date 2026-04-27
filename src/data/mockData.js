@@ -1,0 +1,207 @@
+// ===== DADOS MOCKADOS DO SKILLMATCH =====
+
+export const EMPRESAS = [
+  {
+    id: 'emp1',
+    nome: 'Padaria Pão Quente',
+    tipo: 'Alimentação',
+    descricao: 'Padaria artesanal no bairro com 15 anos de tradição.',
+    avatar: '🍞',
+    cidade: 'Belo Horizonte',
+  },
+  {
+    id: 'emp2',
+    nome: 'Barbearia Corte Certo',
+    tipo: 'Estética',
+    descricao: 'Barbearia moderna com agendamento e fidelidade.',
+    avatar: '💈',
+    cidade: 'Belo Horizonte',
+  },
+  {
+    id: 'emp3',
+    nome: 'ONG Mãos que Ajudam',
+    tipo: 'Social',
+    descricao: 'ONG focada em arrecadação de alimentos para famílias carentes.',
+    avatar: '🤝',
+    cidade: 'Contagem',
+  },
+];
+
+export const ALUNOS = [
+  {
+    id: 'alu1',
+    nome: 'Ana Costa',
+    email: 'ana@email.com',
+    avatar: '👩‍💻',
+    skills: ['React', 'JavaScript', 'CSS', 'Figma'],
+    nivel: 'Intermediário',
+    bio: 'Estudante de Sistemas de Informação apaixonada por front-end.',
+    em_projeto: false,
+    projeto_ativo_id: null,
+    portfolio_externo: [
+      {
+        id: 'pe1',
+        titulo: 'Landing Page Freelance',
+        descricao: 'Landing page responsiva para cliente freelancer.',
+        link: 'https://github.com/anacosta/landing',
+        imagem: 'https://placehold.co/600x400/1a202c/00c6ff?text=Landing+Page',
+        tecnologias: ['HTML', 'CSS', 'JavaScript'],
+      },
+    ],
+  },
+  {
+    id: 'alu2',
+    nome: 'Bruno Silva',
+    email: 'bruno@email.com',
+    avatar: '👨‍💻',
+    skills: ['Python', 'Django', 'PostgreSQL', 'Docker'],
+    nivel: 'Avançado',
+    bio: 'Full-stack dev com experiência em back-end e infra.',
+    em_projeto: true,
+    projeto_ativo_id: 'proj1',
+    portfolio_externo: [
+      {
+        id: 'pe2',
+        titulo: 'API REST de E-commerce',
+        descricao: 'API completa com autenticação JWT e CRUD de produtos.',
+        link: 'https://github.com/brunosilva/ecommerce-api',
+        imagem: 'https://placehold.co/600x400/1a202c/ff944d?text=API+REST',
+        tecnologias: ['Python', 'Django', 'PostgreSQL'],
+      },
+    ],
+  },
+  {
+    id: 'alu3',
+    nome: 'Carla Mendes',
+    email: 'carla@email.com',
+    avatar: '👩‍🎨',
+    skills: ['Figma', 'UI/UX', 'Illustrator', 'HTML'],
+    nivel: 'Intermediário',
+    bio: 'Designer focada em experiência do usuário e interfaces intuitivas.',
+    em_projeto: true,
+    projeto_ativo_id: 'proj1',
+    portfolio_externo: [],
+  },
+  {
+    id: 'alu4',
+    nome: 'Diego Oliveira',
+    email: 'diego@email.com',
+    avatar: '🧑‍💻',
+    skills: ['React', 'Node.js', 'MongoDB', 'TypeScript'],
+    nivel: 'Avançado',
+    bio: 'Desenvolvedor web full-stack com foco em aplicações escaláveis.',
+    em_projeto: false,
+    projeto_ativo_id: null,
+    portfolio_externo: [
+      {
+        id: 'pe3',
+        titulo: 'Dashboard de Métricas',
+        descricao: 'Painel interativo de métricas com gráficos em tempo real.',
+        link: 'https://github.com/diegooliveira/dashboard',
+        imagem: 'https://placehold.co/600x400/1a202c/48bb78?text=Dashboard',
+        tecnologias: ['React', 'Node.js', 'Chart.js'],
+      },
+    ],
+  },
+  {
+    id: 'alu5',
+    nome: 'Elisa Santos',
+    email: 'elisa@email.com',
+    avatar: '👩‍💼',
+    skills: ['Marketing Digital', 'SEO', 'Google Ads', 'Canva'],
+    nivel: 'Iniciante',
+    bio: 'Estudante de marketing digital com interesse em growth hacking.',
+    em_projeto: false,
+    projeto_ativo_id: null,
+    portfolio_externo: [],
+  },
+];
+
+export const PROJETOS = [
+  {
+    id: 'proj1',
+    empresa_id: 'emp1',
+    titulo: 'Site Institucional da Padaria',
+    descricao: 'Criar um site moderno para a padaria com cardápio digital, localização via mapa e formulário de contato. O objetivo é aumentar a presença online e atrair clientes da região.',
+    categoria: 'Desenvolvimento Web',
+    nivel_requerido: 'Intermediário',
+    vagas: 2,
+    time: ['alu2', 'alu3'],
+    candidaturas: [],
+    status: 'em_andamento', // aberto, em_andamento, concluido
+    entregas: [
+      { id: 'e1', titulo: 'Layout aprovado', concluido: true },
+      { id: 'e2', titulo: 'Páginas codificadas', concluido: true },
+      { id: 'e3', titulo: 'Responsividade testada', concluido: false },
+      { id: 'e4', titulo: 'Deploy na Vercel', concluido: false },
+    ],
+    tecnologias: ['HTML', 'CSS', 'JavaScript', 'Figma'],
+    data_criacao: '2026-04-15',
+  },
+  {
+    id: 'proj2',
+    empresa_id: 'emp2',
+    titulo: 'Sistema de Agendamento Online',
+    descricao: 'Desenvolver um sistema de agendamento de horários para a barbearia, com painel administrativo para gerenciar agenda e notificações para clientes.',
+    categoria: 'Desenvolvimento Web',
+    nivel_requerido: 'Avançado',
+    vagas: 1,
+    time: [],
+    candidaturas: [
+      { aluno_id: 'alu4', data: '2026-04-20', mensagem: 'Tenho experiência com sistemas de agendamento em Node.js.' },
+    ],
+    status: 'aberto',
+    entregas: [
+      { id: 'e5', titulo: 'Wireframe aprovado', concluido: false },
+      { id: 'e6', titulo: 'Backend API pronta', concluido: false },
+      { id: 'e7', titulo: 'Frontend integrado', concluido: false },
+    ],
+    tecnologias: ['React', 'Node.js', 'MongoDB'],
+    data_criacao: '2026-04-18',
+  },
+  {
+    id: 'proj3',
+    empresa_id: 'emp3',
+    titulo: 'Campanha de Arrecadação Digital',
+    descricao: 'Criar uma landing page para campanha de arrecadação de alimentos, com contador de metas, formulário de doação e integração com redes sociais.',
+    categoria: 'Marketing Digital',
+    nivel_requerido: 'Iniciante',
+    vagas: 3,
+    time: [],
+    candidaturas: [
+      { aluno_id: 'alu5', data: '2026-04-22', mensagem: 'Posso ajudar com a estratégia de marketing e SEO da campanha.' },
+    ],
+    status: 'aberto',
+    entregas: [
+      { id: 'e8', titulo: 'Estratégia de campanha definida', concluido: false },
+      { id: 'e9', titulo: 'Landing page criada', concluido: false },
+      { id: 'e10', titulo: 'Métricas configuradas', concluido: false },
+    ],
+    tecnologias: ['HTML', 'CSS', 'Google Ads', 'Canva'],
+    data_criacao: '2026-04-20',
+  },
+  {
+    id: 'proj4',
+    empresa_id: 'emp1',
+    titulo: 'Identidade Visual Completa',
+    descricao: 'Redesenhar a identidade visual da padaria: logotipo, paleta de cores, tipografia e material para redes sociais. Entregar manual de marca simplificado.',
+    categoria: 'Design',
+    nivel_requerido: 'Intermediário',
+    vagas: 1,
+    time: [],
+    candidaturas: [],
+    status: 'aberto',
+    entregas: [
+      { id: 'e11', titulo: 'Moodboard aprovado', concluido: false },
+      { id: 'e12', titulo: 'Logotipo finalizado', concluido: false },
+      { id: 'e13', titulo: 'Manual de marca entregue', concluido: false },
+    ],
+    tecnologias: ['Figma', 'Illustrator'],
+    data_criacao: '2026-04-22',
+  },
+];
+
+// Categorias disponíveis para filtro
+export const CATEGORIAS = ['Todas', 'Desenvolvimento Web', 'Marketing Digital', 'Design'];
+export const NIVEIS = ['Todos', 'Iniciante', 'Intermediário', 'Avançado'];
+export const TIPOS = ['Todos', 'Individual', 'Time'];
