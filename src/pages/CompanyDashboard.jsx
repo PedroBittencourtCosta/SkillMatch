@@ -13,6 +13,7 @@ import {
   StatNumber,
   StatHelpText,
 } from '@chakra-ui/react';
+import { useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { HiClipboardList, HiUsers, HiCheckCircle, HiClock, HiArrowRight } from 'react-icons/hi';
 import { useApp } from '../context/AppContext';
@@ -24,8 +25,13 @@ export default function CompanyDashboard() {
   const { usuario, getProjetosDaEmpresa, projetos } = useApp();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!usuario || usuario.tipo !== 'empresa') {
+      navigate('/login');
+    }
+  }, [usuario, navigate]);
+
   if (!usuario || usuario.tipo !== 'empresa') {
-    navigate('/login');
     return null;
   }
 

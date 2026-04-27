@@ -51,7 +51,7 @@ export function AppProvider({ children }) {
       setUsuario({ tipo: 'aluno', ...aluno });
     } else {
       const empresa = empresas.find((e) => e.id === id);
-      setUsuario({ tipo: 'empresa', ...empresa });
+      setUsuario({ ...empresa, tipo: 'empresa', tipo_negocio: empresa.tipo });
     }
   }
 
