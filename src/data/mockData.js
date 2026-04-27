@@ -122,13 +122,14 @@ export const PROJETOS = [
     id: 'proj1',
     empresa_id: 'emp1',
     titulo: 'Site Institucional da Padaria',
-    descricao: 'Criar um site moderno para a padaria com cardápio digital, localização via mapa e formulário de contato. O objetivo é aumentar a presença online e atrair clientes da região.',
+    descricao: 'Criar um site moderno para a padaria com cardápio digital, localização via mapa e formulário de contato.',
     categoria: 'Desenvolvimento Web',
     nivel_requerido: 'Intermediário',
+    capital_disponivel: 1500.00,
     vagas: 2,
     time: ['alu2', 'alu3'],
     candidaturas: [],
-    status: 'em_andamento', // aberto, em_andamento, concluido
+    status: 'em_andamento',
     entregas: [
       { id: 'e1', titulo: 'Layout aprovado', concluido: true },
       { id: 'e2', titulo: 'Páginas codificadas', concluido: true },
@@ -142,9 +143,10 @@ export const PROJETOS = [
     id: 'proj2',
     empresa_id: 'emp2',
     titulo: 'Sistema de Agendamento Online',
-    descricao: 'Desenvolver um sistema de agendamento de horários para a barbearia, com painel administrativo para gerenciar agenda e notificações para clientes.',
+    descricao: 'Desenvolver um sistema de agendamento de horários para a barbearia com painel administrativo.',
     categoria: 'Desenvolvimento Web',
     nivel_requerido: 'Avançado',
+    capital_disponivel: 3500.00,
     vagas: 1,
     time: [],
     candidaturas: [
@@ -163,13 +165,14 @@ export const PROJETOS = [
     id: 'proj3',
     empresa_id: 'emp3',
     titulo: 'Campanha de Arrecadação Digital',
-    descricao: 'Criar uma landing page para campanha de arrecadação de alimentos, com contador de metas, formulário de doação e integração com redes sociais.',
+    descricao: 'Criar uma landing page para campanha de arrecadação de alimentos com contador de metas.',
     categoria: 'Marketing Digital',
     nivel_requerido: 'Iniciante',
+    capital_disponivel: 500.00,
     vagas: 3,
     time: [],
     candidaturas: [
-      { aluno_id: 'alu5', data: '2026-04-22', mensagem: 'Posso ajudar com a estratégia de marketing e SEO da campanha.' },
+      { aluno_id: 'alu5', data: '2026-04-22', mensagem: 'Posso ajudar com a estratégia de marketing.' },
     ],
     status: 'aberto',
     entregas: [
@@ -184,9 +187,10 @@ export const PROJETOS = [
     id: 'proj4',
     empresa_id: 'emp1',
     titulo: 'Identidade Visual Completa',
-    descricao: 'Redesenhar a identidade visual da padaria: logotipo, paleta de cores, tipografia e material para redes sociais. Entregar manual de marca simplificado.',
+    descricao: 'Redesenhar a identidade visual da padaria: logotipo, paleta de cores e manual de marca.',
     categoria: 'Design',
     nivel_requerido: 'Intermediário',
+    capital_disponivel: 1200.00,
     vagas: 1,
     time: [],
     candidaturas: [],
@@ -201,7 +205,6 @@ export const PROJETOS = [
   },
 ];
 
-// Categorias disponíveis para filtro
 export const CATEGORIAS = ['Todas', 'Desenvolvimento Web', 'Marketing Digital', 'Design'];
 export const NIVEIS = ['Todos', 'Iniciante', 'Intermediário', 'Avançado'];
 export const TIPOS = ['Todos', 'Individual', 'Time'];

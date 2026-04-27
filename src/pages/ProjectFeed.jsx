@@ -134,6 +134,7 @@ export default function ProjectFeed() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: 0.15 + i * 0.05 }}
                 >
+                  {/* Aqui o projeto vai com o novo campo para o card */}
                   <ProjectCard projeto={projeto} />
                 </MotionBox>
               ))}

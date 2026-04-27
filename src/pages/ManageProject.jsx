@@ -322,7 +322,7 @@ export default function ManageProject() {
             </Box>
 
             {/* Entregas */}
-            <Box
+            {/* <Box
               bg="rgba(26, 32, 44, 0.5)"
               border="1px solid rgba(255,255,255,0.06)"
               borderRadius="2xl"
@@ -343,7 +343,7 @@ export default function ManageProject() {
                   </HStack>
                 ))}
               </VStack>
-            </Box>
+            </Box> */}
 
             {/* Concluir Projeto */}
             {projeto.status === 'em_andamento' && (

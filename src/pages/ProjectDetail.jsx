@@ -15,7 +15,7 @@ import {
   Avatar,
 } from '@chakra-ui/react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { HiArrowLeft, HiUsers, HiCalendar, HiLocationMarker } from 'react-icons/hi';
+import { HiArrowLeft, HiUsers, HiCalendar, HiLocationMarker, HiCurrencyDollar } from 'react-icons/hi';
 import { useApp } from '../context/AppContext';
 import TeamBadge from '../components/TeamBadge';
 import { useState } from 'react';
@@ -110,6 +110,28 @@ export default function ProjectDetail() {
                   <HStack><HiLocationMarker /><Text>{empresa?.cidade}</Text></HStack>
                   <HStack><HiCalendar /><Text>{projeto.data_criacao}</Text></HStack>
                 </HStack>
+
+                {/* NOVO: Campo de Capital */}
+                <Box
+                  bg="rgba(0, 198, 255, 0.05)"
+                  p={3}
+                  borderRadius="xl"
+                  border="1px solid rgba(0, 198, 255, 0.1)"
+                >
+                  <HStack spacing={2}>
+                    <Box color="cyan.400" fontSize="xl">
+                      <HiCurrencyDollar />
+                    </Box>
+                    <VStack align="start" spacing={0}>
+                      <Text fontSize="xs" color="gray.500" fontWeight="bold" textTransform="uppercase">
+                        Capital Disponível
+                      </Text>
+                      <Text color="cyan.300" fontWeight="800" fontSize="md">
+                        {(projeto.capital_disponivel ?? 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                      </Text>
+                    </VStack>
+                  </HStack>
+                </Box>
 
                 <Divider borderColor="whiteAlpha.100" />
 
@@ -240,7 +262,7 @@ export default function ProjectDetail() {
             )}
 
             {/* Entregas */}
-            <Box
+            {/* <Box
               bg="rgba(26, 32, 44, 0.5)"
               border="1px solid rgba(255,255,255,0.06)"
               borderRadius="2xl"
@@ -267,7 +289,7 @@ export default function ProjectDetail() {
                   </HStack>
                 ))}
               </VStack>
-            </Box>
+            </Box> */}
           </VStack>
         </MotionBox>
       </Container>
