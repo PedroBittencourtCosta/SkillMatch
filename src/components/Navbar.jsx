@@ -23,9 +23,10 @@ import { HiMenu, HiChevronDown, HiLogout, HiRefresh } from 'react-icons/hi';
 import { useApp } from '../context/AppContext';
 
 export default function Navbar() {
-  const { usuario, logout, resetData } = useApp();
+  const { usuario, logout, resetData, getTotalNaoLidas } = useApp();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
+  const totalNaoLidas = getTotalNaoLidas();
 
   const handleLogout = () => {
     logout();
@@ -45,12 +46,58 @@ export default function Navbar() {
           <Button as={Link} to="/portfolio" variant="ghost" size="sm" onClick={onClickLink}>
             Portfólio
           </Button>
+          <Button as={Link} to="/chat" variant="ghost" size="sm" onClick={onClickLink} position="relative">
+            Chat
+            {totalNaoLidas > 0 && (
+              <Badge
+                colorScheme="red"
+                borderRadius="full"
+                position="absolute"
+                top="-1px"
+                right="-1px"
+                fontSize="9px"
+                minW="16px"
+                h="16px"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+              >
+                {totalNaoLidas}
+              </Badge>
+            )}
+          </Button>
         </>
       )}
       {usuario?.tipo === 'empresa' && (
         <>
           <Button as={Link} to="/empresa/dashboard" variant="ghost" size="sm" onClick={onClickLink}>
             Dashboard
+          </Button>
+          <Button as={Link} to="/projetos" variant="ghost" size="sm" onClick={onClickLink}>
+            Projetos
+          </Button>
+          <Button as={Link} to="/freelancers" variant="ghost" size="sm" onClick={onClickLink}>
+            Freelancers
+          </Button>
+          <Button as={Link} to="/chat" variant="ghost" size="sm" onClick={onClickLink} position="relative">
+            Chat
+            {totalNaoLidas > 0 && (
+              <Badge
+                colorScheme="red"
+                borderRadius="full"
+                position="absolute"
+                top="-1px"
+                right="-1px"
+                fontSize="9px"
+                minW="16px"
+                h="16px"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+              >
+                {totalNaoLidas}
+              </Badge>
+            )}
           </Button>
         </>
       )}

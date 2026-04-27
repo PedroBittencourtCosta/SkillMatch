@@ -12,10 +12,11 @@ import {
   StatLabel,
   StatNumber,
   StatHelpText,
+  Button,
 } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { HiClipboardList, HiUsers, HiCheckCircle, HiClock, HiArrowRight } from 'react-icons/hi';
+import { HiClipboardList, HiUsers, HiCheckCircle, HiClock, HiArrowRight, HiPlus } from 'react-icons/hi';
 import { useApp } from '../context/AppContext';
 import { motion } from 'framer-motion';
 
@@ -108,7 +109,17 @@ export default function CompanyDashboard() {
 
           {/* Lista de Projetos */}
           <VStack spacing={4} align="stretch">
-            <Heading fontSize="lg" fontWeight="700">Meus Projetos</Heading>
+            <Flex justify="space-between" align="center">
+              <Heading fontSize="lg" fontWeight="700">Meus Projetos</Heading>
+              <Button
+                variant="brand"
+                size="sm"
+                leftIcon={<HiPlus />}
+                onClick={() => navigate('/empresa/novo-projeto')}
+              >
+                Novo Projeto
+              </Button>
+            </Flex>
             {meusProjetos.length === 0 ? (
               <Box
                 bg="rgba(26, 32, 44, 0.5)"

@@ -25,6 +25,11 @@ export function AppProvider({ children }) {
     return saved ? JSON.parse(saved) : null;
   });
 
+  const [mensagens, setMensagens] = useState(() => {
+    const saved = localStorage.getItem('sm_mensagens');
+    return saved ? JSON.parse(saved) : [];
+  });
+
   // Persiste no localStorage
   useEffect(() => {
     localStorage.setItem('sm_alunos', JSON.stringify(alunos));
@@ -41,6 +46,10 @@ export function AppProvider({ children }) {
       localStorage.removeItem('sm_usuario');
     }
   }, [usuario]);
+
+  useEffect(() => {
+    localStorage.setItem('sm_mensagens', JSON.stringify(mensagens));
+  }, [mensagens]);
 
   // ===== AÇÕES =====
 
@@ -64,6 +73,7 @@ export function AppProvider({ children }) {
   function resetData() {
     setAlunos(ALUNOS);
     setProjetos(PROJETOS);
+    setMensagens([]);
     setUsuario(null);
     localStorage.clear();
   }
@@ -167,6 +177,31 @@ export function AppProvider({ children }) {
     }
   }
 
+  // Criar novo projeto (empresa)
+  function criarProjeto(dadosProjeto) {
+    if (!usuario || usuario.tipo !== 'empresa') return;
+
+    const novoProjeto = {
+      id: `proj_${Date.now()}`,
+      empresa_id: usuario.id,
+      titulo: dadosProjeto.titulo,
+      descricao: dadosProjeto.descricao,
+      categoria: dadosProjeto.categoria,
+      nivel_requerido: dadosProjeto.nivel_requerido,
+      vagas: dadosProjeto.vagas,
+      vagas_detalhes: dadosProjeto.vagas_detalhes || [],
+      time: [],
+      candidaturas: [],
+      status: 'aberto',
+      entregas: dadosProjeto.entregas || [],
+      tecnologias: dadosProjeto.tecnologias || [],
+      data_criacao: new Date().toISOString().split('T')[0],
+    };
+
+    setProjetos((prev) => [...prev, novoProjeto]);
+    return novoProjeto;
+  }
+
   // Adicionar projeto externo ao portfólio
   function addProjetoExterno(projetoExterno) {
     if (!usuario || usuario.tipo !== 'aluno') return;
@@ -198,6 +233,90 @@ export function AppProvider({ children }) {
         };
       })
     );
+  }
+
+  // ===== CHAT / MENSAGENS =====
+
+  // Gera um ID de conversa consistente entre dois usuários
+  function getConversaId(userId1, userId2) {
+    return [userId1, userId2].sort().join('_');
+  }
+
+  // Envia uma mensagem
+  function enviarMensagem(destinatarioId, texto) {
+    if (!usuario || !texto.trim()) return;
+
+    const novaMensagem = {
+      id: `msg_${Date.now()}`,
+      conversa_id: getConversaId(usuario.id, destinatarioId),
+      remetente_id: usuario.id,
+      destinatario_id: destinatarioId,
+      texto: texto.trim(),
+      timestamp: new Date().toISOString(),
+      lida: false,
+    };
+
+    setMensagens((prev) => [...prev, novaMensagem]);
+  }
+
+  // Marca mensagens de uma conversa como lidas
+  function marcarComoLida(conversaId) {
+    if (!usuario) return;
+    setMensagens((prev) =>
+      prev.map((m) =>
+        m.conversa_id === conversaId && m.destinatario_id === usuario.id && !m.lida
+          ? { ...m, lida: true }
+          : m
+      )
+    );
+  }
+
+  // Retorna todas as conversas do usuário logado
+  function getConversas() {
+    if (!usuario) return [];
+
+    const conversasMap = {};
+    mensagens.forEach((m) => {
+      if (m.remetente_id !== usuario.id && m.destinatario_id !== usuario.id) return;
+      const outroId = m.remetente_id === usuario.id ? m.destinatario_id : m.remetente_id;
+      const conversaId = m.conversa_id;
+
+      if (!conversasMap[conversaId]) {
+        conversasMap[conversaId] = {
+          id: conversaId,
+          outroUsuarioId: outroId,
+          ultimaMensagem: m,
+          naoLidas: 0,
+        };
+      }
+
+      // Atualiza última mensagem se for mais recente
+      if (new Date(m.timestamp) > new Date(conversasMap[conversaId].ultimaMensagem.timestamp)) {
+        conversasMap[conversaId].ultimaMensagem = m;
+      }
+
+      // Conta não lidas
+      if (m.destinatario_id === usuario.id && !m.lida) {
+        conversasMap[conversaId].naoLidas++;
+      }
+    });
+
+    return Object.values(conversasMap).sort(
+      (a, b) => new Date(b.ultimaMensagem.timestamp) - new Date(a.ultimaMensagem.timestamp)
+    );
+  }
+
+  // Retorna mensagens de uma conversa específica
+  function getMensagensConversa(conversaId) {
+    return mensagens
+      .filter((m) => m.conversa_id === conversaId)
+      .sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+  }
+
+  // Total de mensagens não lidas
+  function getTotalNaoLidas() {
+    if (!usuario) return 0;
+    return mensagens.filter((m) => m.destinatario_id === usuario.id && !m.lida).length;
   }
 
   // Helpers
@@ -236,6 +355,13 @@ export function AppProvider({ children }) {
     getAluno,
     getProjetosDoAluno,
     getProjetosDaEmpresa,
+    criarProjeto,
+    enviarMensagem,
+    marcarComoLida,
+    getConversas,
+    getMensagensConversa,
+    getConversaId,
+    getTotalNaoLidas,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

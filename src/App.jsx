@@ -10,6 +10,10 @@ import ActiveProject from './pages/ActiveProject';
 import Portfolio from './pages/Portfolio';
 import CompanyDashboard from './pages/CompanyDashboard';
 import ManageProject from './pages/ManageProject';
+import FreelancerFeed from './pages/FreelancerFeed';
+import FreelancerDetail from './pages/FreelancerDetail';
+import CreateProject from './pages/CreateProject';
+import Chat from './pages/Chat';
 
 export default function App() {
   return (
@@ -26,6 +30,11 @@ export default function App() {
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/empresa/dashboard" element={<CompanyDashboard />} />
             <Route path="/empresa/projeto/:id" element={<ManageProject />} />
+            <Route path="/empresa/novo-projeto" element={<CreateProject />} />
+            <Route path="/freelancers" element={<FreelancerFeed />} />
+            <Route path="/freelancer/:id" element={<FreelancerDetail />} />
+            <Route path="/chat" element={<Chat />} />
+            <Route path="/chat/:conversaId" element={<Chat />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Box>

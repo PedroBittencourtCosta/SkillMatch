@@ -100,13 +100,25 @@ export default function ProjectFeed() {
                   />
                 </InputGroup>
                 <Select value={categoria} onChange={(e) => setCategoria(e.target.value)} {...selectStyles}>
-                  {CATEGORIAS.map((c) => <option key={c} value={c}>{c}</option>)}
+                  {CATEGORIAS.map((c) => (
+                    <option key={c} value={c}>
+                      {c === 'Todas' ? 'Todas as Categorias' : c}
+                    </option>
+                  ))}
                 </Select>
                 <Select value={nivel} onChange={(e) => setNivel(e.target.value)} {...selectStyles}>
-                  {NIVEIS.map((n) => <option key={n} value={n}>{n}</option>)}
+                  {NIVEIS.map((n) => (
+                    <option key={n} value={n}>
+                      {n === 'Todos' ? 'Todos os Níveis' : n}
+                    </option>
+                  ))}
                 </Select>
                 <Select value={tipo} onChange={(e) => setTipo(e.target.value)} {...selectStyles}>
-                  {TIPOS.map((t) => <option key={t} value={t}>{t}</option>)}
+                  {TIPOS.map((t) => (
+                    <option key={t} value={t}>
+                      {t === 'Todos' ? 'Todos os Tipos' : t}
+                    </option>
+                  ))}
                 </Select>
               </SimpleGrid>
             </Box>
